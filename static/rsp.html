@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>DApp Rock Scissors Paper</title>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" type='text/css'>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.3.0/dist/semantic.min.css">
+		<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.3.0/dist/semantic.min.js"></script>
+
+	</head>
+	<body class="container">
+		
+		<div class="ui grid">
+			<div class="ui relaxed divided list eight wide column" id="accounts-list">
+			</div>
+
+			<div class="ui relaxed divided list eight wide column" id="games-list">
+			</div>
+		</div>
+
+		<div align="center">
+			<button class="ui icon button" id="toggle-account">
+				<i class="flag checkered icon"></i>
+			</button>
+		</div>
+
+		<div class="account" align="center">
+			<div class="ui statistic">
+			  <div class="value" id="selected-value">
+			  </div>
+			  <div class="label" id="selected-label">
+			  </div>
+			</div>
+
+		<div class="account" align="center">
+			<div class="ui statistic">
+				<div class="value" id="target-value">
+				</div>
+				<div class="label" id="target-label">
+				</div>
+			</div>
+		</div>
+		
+		<div>
+			<button class="ui icon button" id="start-game">
+  				<i class="play icon"></i>
+			</button>
+		</div>
+		
+
+	</body>
+	<script>
+		CONTRACT_ADDRESS = 'REPLACE_WITH_CONTRACT_ADDRESS';
+		ABI_DEFINITION = JSON.parse('REPLACE_WITH_ABI_DEFINITION');
+	</script>
+	<script src="https://cdn.rawgit.com/ethereum/web3.js/35ae85a5d30500f7df20c47594d529af872ac88a/dist/web3.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+	<script src="./static/rspbattle.js"></script>
+</html>

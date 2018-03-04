@@ -1,0 +1,26 @@
+{
+  "name": "smartcontract_tutorial",
+  "version": "1.0.0",
+  "description": "smart-contract tutorial",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/znxkznxk1030/smartcontract_tutorial.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/znxkznxk1030/smartcontract_tutorial/issues"
+  },
+  "homepage": "https://github.com/znxkznxk1030/smartcontract_tutorial#readme",
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "solc": "^0.4.20",
+    "web3": "^1.0.0-beta.30",
+    "web3-eth": "^1.0.0-beta.30",
+    "web3-eth-contract": "^1.0.0-beta.30"
+  }
+}
