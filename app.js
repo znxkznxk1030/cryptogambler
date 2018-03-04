@@ -61,7 +61,7 @@ web3.eth.getAccounts(function (err, accounts) {
 			try {
 				fileContents = fs.readFileSync(__dirname + req.url, 'utf8');
 			} catch (e) {
-				fileContents = fs.readFileSync(__dirname + '/static/rsp.html', 'utf8');
+				fileContents = fs.readFileSync(__dirname + '/static/index.html', 'utf8');
 			}
 
 			
