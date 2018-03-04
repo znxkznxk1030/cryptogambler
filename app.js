@@ -6,53 +6,54 @@ const http = require('http');
 // Connect to local Ethereum node
 const web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 
+var ownerAccount;
+var gas, gasPrice;
+
+var deployContract = function (path, contractname, callback){
+	let code = fs.readFileSync(path).toString();
+
+	let output = solc.compile(code, 1);
+	
+	let bytecode = output.contracts[':' + contractname].bytecode;
+	let abi = output.contracts[':' + contractname].interface;
+
+	let Contract = new web3.eth.Contract(JSON.parse(abi), ownerAccount);
+	let contractInstance;
+
+	Contract.deploy({
+		data : '0x' + bytecode,
+		arguments : []
+	})
+	.send({
+		from : ownerAccount,
+		gas : gas,
+		gasPrice : gasPrice
+	})
+	.on('error', function(error) {
+		return callback(error);
+	})
+	.then(function(contractInstance) {
+		return callback(null, contractInstance.options.address, abi);
+	});
+}
+
 // Compile the source code
 web3.eth.getAccounts(function (err, accounts) {
 
-	if (err) {console.log(err); return ;}
+	if (err) {
+		throw err;
+	}
 
-	console.log(accounts);
+	//console.log(accounts);
+	
+	ownerAccount = accounts[1];
+	gas = 1000000;
+	gasPrice = '30000000000000';
 
-	let ownAccount = accounts[2];
-	let defaultAccount = web3.eth.defaultAccount;
-
-	web3.eth.getBalance(ownAccount)
+	web3.eth.getBalance(ownerAccount)
 	.then(console.log);
-
-	let input = fs.readFileSync('./contracts/rspbattle.sol');
-	let output = solc.compile(input.toString(), 1);
-
-
-	let bytecode = output.contracts[':RSPBattle'].bytecode;
-	let abi = output.contracts[':RSPBattle'].interface;
-	let Contract = new web3.eth.Contract(JSON.parse(abi), ownAccount);
-
-	let deployedContract = null;
-
-	Contract.deploy({
-		data:'0x' + bytecode,
-		arguments: []
-	})
-	.send({
-	   	from: ownAccount,
-		gas: 1000000,
-		gasPrice: '30000000000000',
-   	})
-	.on('error', function (error) {
-                console.log(error);
-        })
-        .on('transactionHash', function (transaction) {
-                console.log('transactionHash : ' + transaction);
-        })
-        .on('confirmation', function (number, receipt) {
-                console.log('number : ' + number + '\nreceipt : ' + receipt);
-        })
-   	.then(function (ContractInstance) {
-		console.log('hello!');
-		deployedContract = ContractInstance;
-
-   	})
-	.then(function () {
+	
+	deployContract('./contracts/rspbattle.sol', 'RSPBattle', function (err, address, abi) {
 		const server = http.createServer(function (req, res) {
 			res.writeHead(200);
 
@@ -68,7 +69,7 @@ web3.eth.getAccounts(function (err, accounts) {
 			res.end(
 				fileContents.replace(
                        	                /REPLACE_WITH_CONTRACT_ADDRESS/g,
-                               	        deployedContract.options.address
+                               	        address
                               		).replace(
                                	        /REPLACE_WITH_ABI_DEFINITION/g,
                                        	abi
@@ -82,8 +83,6 @@ web3.eth.getAccounts(function (err, accounts) {
 		server.listen(8000, function () {
 			console.log('Listening on localhost:8000');
 		});
-	})
-	.catch(function (error) {
 	});
 });
 
