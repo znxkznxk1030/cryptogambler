@@ -44,8 +44,6 @@ web3.eth.getAccounts(function (err, accounts) {
 		throw err;
 	}
 
-	//console.log(accounts);
-	
 	ownerAccount = accounts[1];
 	gas = 1000000;
 	gasPrice = '30000000000000';
