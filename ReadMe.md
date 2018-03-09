@@ -17,7 +17,7 @@
 
 ### Working on LocalHost via testrpc
 
-![web_example](./img/web_example.png)
+![web_example](<https://s3.ap-northeast-2.amazonaws.com/firstbase-bucket/web_example.png>)
 
 
 
@@ -25,8 +25,8 @@
 
 ### Contracts Working on Remix
 
-![remix_code](../cryptogambler/img/remix_code.png)
+![remix_code](<https://s3.ap-northeast-2.amazonaws.com/firstbase-bucket/remix_code.png>)
 
 
 
-![remix_exec](../cryptogambler/img/remix_exec.png)
+![remix_exec](<https://s3.ap-northeast-2.amazonaws.com/firstbase-bucket/remix_exec.png>)
