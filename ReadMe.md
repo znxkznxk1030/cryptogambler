@@ -17,7 +17,7 @@
 
 ### Working on LocalHost via testrpc
 
-![web_example](../cryptogambler/img/web_example.png)
+![web_example](./img/web_example.png)
 
 
 
